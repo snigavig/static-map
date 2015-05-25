@@ -52,7 +52,7 @@ public class MapsAdapter extends BaseAdapter {
 
     private Context context;
     private Bitmap placeHolder;
-    private SparseArray<Bitmap> maps = new SparseArray<Bitmap>();
+    private SparseArray<Bitmap> maps = new SparseArray<>();
 
     public MapsAdapter(Context context) {
         this.context = context;

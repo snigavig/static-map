@@ -14,10 +14,8 @@ import java.util.List;
  */
 public class Config {
 
-    public static final dmax.staticmap.Marker[] MARKERS_ARRAY_TEMPLATE = new dmax.staticmap.Marker[0];
-    public static final dmax.staticmap.PathPoint[] PATH_ARRAY_TEMPLATE = new dmax.staticmap.PathPoint[0];
     private MapType mapType;
-    private boolean secure = false;
+    private boolean secure = true;
     private int zoomRatio = -1;
     private int scaleRatio;
     private int width = -1;
@@ -25,8 +23,8 @@ public class Config {
     private float centerLatitude = -1f;
     private float centerLongitude = -1f;
     private String address;
-    private List<dmax.staticmap.Marker> markers = new ArrayList<dmax.staticmap.Marker>();
-    private List<dmax.staticmap.PathPoint> path = new ArrayList<PathPoint>();
+    private List<dmax.staticmap.Marker> markers = new ArrayList<>();
+    private List<dmax.staticmap.PathPoint> path = new ArrayList<>();
     private String pathColor;
     private int pathWeight = -1;
 
@@ -43,11 +41,11 @@ public class Config {
     }
 
     public dmax.staticmap.Marker[] getMarkers() {
-        return markers.toArray(MARKERS_ARRAY_TEMPLATE);
+        return markers.toArray(new Marker[markers.size()]);
     }
 
     public dmax.staticmap.PathPoint[] getPath() {
-        return path.toArray(PATH_ARRAY_TEMPLATE);
+        return path.toArray(new PathPoint[path.size()]);
     }
 
     public MapType getMapType() {

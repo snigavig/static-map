@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +34,7 @@ import static dmax.staticmap.Callback.WRONG_URL;
 public class StaticMap {
 
     // URL segments builders
-    private static List<Segment> segments = new LinkedList<Segment>();
+    private static List<Segment> segments = new LinkedList<>();
     static {
         segments.add(new HeadSegment()); // must be first
         segments.add(new MapTypeSegment());
@@ -74,8 +73,8 @@ public class StaticMap {
      * @param callback class to receive result or error callbacks
      */
     public static void requestMapImage(final Context context, Config config, final Callback callback) {
-        AsyncTask<Config, Pair<Integer, String>, Bitmap> loader =
-                new AsyncTask<Config, Pair<Integer, String>, Bitmap>() {
+        AsyncTask<Config, String[], Bitmap> loader =
+                new AsyncTask<Config, String[], Bitmap>() {
 
             @Override
             protected Bitmap doInBackground(Config... configs) {
@@ -83,17 +82,17 @@ public class StaticMap {
                     String url = buildUrl(check(configs[0]), context);
                     return loadBitmap(url);
                 } catch (MalformedURLException e) {
-                    publishProgress(new Pair(WRONG_URL, e.getMessage()));
+                    publishProgress(new String[]{String.valueOf(WRONG_URL), e.getMessage()});
                 } catch (IOException e) {
-                    publishProgress(new Pair(NETWORK_ERROR, e.getMessage()));
+                    publishProgress(new String[]{String.valueOf(NETWORK_ERROR), e.getMessage()});
                 }
                 return null;
             }
 
             @Override
-            protected void onProgressUpdate(Pair<Integer, String>... values) {
-                int errorCode = values[0].first;
-                String errorMsg = values[0].second;
+            protected final void onProgressUpdate(String[]... values) {
+                int errorCode = Integer.parseInt(values[0][0]);
+                String errorMsg = values[0][1];
                 if (errorCode > 0) {
                     cancel(true);
                     callback.onFailed(errorCode, errorMsg);
@@ -119,7 +118,7 @@ public class StaticMap {
         return urlBuilder.toString();
     }
 
-    private static Bitmap loadBitmap(String url) throws MalformedURLException, IOException {
+    private static Bitmap loadBitmap(String url) throws IOException {
         InputStream stream = new URL(url).openStream();
         Bitmap result = BitmapFactory.decodeStream(stream);
         stream.close();

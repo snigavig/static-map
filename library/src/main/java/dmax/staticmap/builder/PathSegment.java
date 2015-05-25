@@ -25,12 +25,12 @@ public class PathSegment extends Segment {
         appendPathParameters(urlBuilder, context, pathWeight, config.getPathWeight());
 
         for (PathPoint pathPoint : path) {
-            appendPathPoint(pathPoint, urlBuilder, context);
+            appendPathPoint(pathPoint, urlBuilder);
         }
         urlBuilder.deleteCharAt(urlBuilder.length() - 1);
     }
 
-    private void appendPathPoint(PathPoint pathPoint, StringBuilder urlBuilder, Context context) {
+    private void appendPathPoint(PathPoint pathPoint, StringBuilder urlBuilder) {
         urlBuilder.append(createLocation(pathPoint)).append(SEPARATOR_MARKER);
     }
 

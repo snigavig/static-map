@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="dmax.staticmap.sample"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dmax.staticmap.sample">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application>
+    <application
+        android:allowBackup="false"
+        android:icon="@android:drawable/sym_def_app_icon">
         <activity android:name=".MainActivity"
-                  android:theme="@android:style/Theme.Holo.Light"
-                  android:label="StaticMap sample">
+            android:label="StaticMap sample"
+            android:theme="@android:style/Theme.Holo.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

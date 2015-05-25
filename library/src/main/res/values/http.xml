@@ -13,4 +13,7 @@
     <string name="markerColor">color:%1$s</string>
     <string name="markerSize">size:%1$s</string>
     <string name="markerLabel">label:%1$s</string>
+    <string name="pathDef">path=</string>
+    <string name="pathColor">color:%1$s</string>
+    <string name="pathWeight">weight:%1$d</string>
 </resources>

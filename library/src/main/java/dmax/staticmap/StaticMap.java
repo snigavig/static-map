@@ -13,10 +13,10 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import dmax.staticmap.Callback;
 import dmax.staticmap.builder.HeadSegment;
 import dmax.staticmap.builder.MapTypeSegment;
 import dmax.staticmap.builder.MarkerSegment;
+import dmax.staticmap.builder.PathSegment;
 import dmax.staticmap.builder.PositionSegment;
 import dmax.staticmap.builder.ScaleSegment;
 import dmax.staticmap.builder.Segment;
@@ -41,6 +41,7 @@ public class StaticMap {
         segments.add(new MapTypeSegment());
         segments.add(new ScaleSegment());
         segments.add(new MarkerSegment());
+        segments.add(new PathSegment());
         segments.add(new PositionSegment());
     }
 
@@ -115,7 +116,6 @@ public class StaticMap {
         for (Segment segment : segments) {
             segment.append(config, urlBuilder, context);
         }
-
         return urlBuilder.toString();
     }
 
@@ -123,6 +123,7 @@ public class StaticMap {
         InputStream stream = new URL(url).openStream();
         Bitmap result = BitmapFactory.decodeStream(stream);
         stream.close();
+
         return result;
     }
 
